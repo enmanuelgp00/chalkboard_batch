@@ -1,0 +1,1 @@
+adb shell dumpsys | adb shell grep "android.intent.extra.PHONE_NUMBER"

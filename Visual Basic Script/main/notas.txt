@@ -1,0 +1,9 @@
+cuando disparas una sub sin guardar su resultado, no usas paréntesis, como en el caso de:
+
+msgbox [string], [num], [title]
+
+lo cual es diferente si usas una variable:
+
+msg = msgbox([string], [num], [title]) 
+
+osea, si devuelve un valor hay que salvarlo, en este caso el boton que pulse el usuario lo mismo sucede con createObject()

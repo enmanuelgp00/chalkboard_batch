@@ -1,0 +1,17 @@
+netsh interface set interface Wi-Fi [enable | disable]
+
+sfc
+	Examina la integridad de todos los archivos de sistema protegidos y reemplaza
+	las versiones incorrectas por las correctas de Microsoft.
+
+bcdedit -set TESTSIGNING OFF 
+	Clean up windows waterprint
+
+SETX | REG DELETE | REG QUERY
+	Global value
+
+mrt
+	Malicious Software Removal Tool
+
+wmic logicaldisk
+bitsadmin /transfer myDownloadJob /download /priority normal "https://images.pexels.com/photos/60597/dahlia-red-blossom-bloom-60597.jpeg?cs=srgb&dl=pexels-pixabay-60597.jpg&fm=jpg" c:\\10mb.jpg

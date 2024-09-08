@@ -1,0 +1,1 @@
+settings put system screen_brightness 0

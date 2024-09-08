@@ -1,0 +1,58 @@
+attrib a
+bitsadmin
+chkdsk 
+diskpart 
+eventvwr 
+icacls (Integrity Control Access Control Lists)
+ipconfig                                       
+mdsched 
+mrt 
+net 
+netsh 
+powercfg 
+runAs 
+sfc 
+takeown 
+whoami 
+winsat 
+
+#emulacion de sistemas
+wsl
+
+#servicios de windows
+net start [service] 
+sc start
+sc query [service]
+sc config [service] start=[auto]
+sc query state=all | findstr /i "windows"
+
+
+#trabajar con el clipboard
+  clip 
+
+#ocultando un archivo por completo usando el comando attrib y aprovechando la cualidad del sistema con +s
+  attrib +s +h <file>
+
+#hacer descargas del internet
+  curl
+
+
+
+#administraci'on de variables de entorno globalizadas
+  #borrar valiable del sistema HKML (Handle Key Local Machine)
+  reg delete "hklm\system\currentcontrolset\control\session manager\environment" /v  ESET_OPTIONS
+  #borrar variable del usuario HKCU (Handle Key Current User)
+  reg delete "hkcu\evironment"
+  #registro en el startup 
+  reg query "hkcu\software\microsoft\windows\currentversion\run"
+
+#administra las contrase;as de los usuarios, convinado con el comando runas /user: %username% /savecred %app.exe%, puedes ver lo que haz creado
+  cmdkey /list
+
+#para ver los SId (Security Identifier) de los usuarios 
+  wmic useraccount get name,sid
+
+#Sobre el c'odigo de la pagina 
+  chcp (chage code page)
+  #a qu'i se muestra el c'odigo de la pagina por defecto (debes usar los s'imbolos de escape ^, perara poder reprensentar % como literales)
+  reg query hkcu\console\^%SystemRoot^%_system32_cmd.exe
