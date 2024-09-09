@@ -5,37 +5,51 @@ rem restTime <start> <finish>
 set startTime=%~1
 set startTime=!startTime:.= !
 set startTime=!startTime::= !
-::echo !startTime!
 
 set finishTime=%~2
 set finishTime=!finishTime:.= !
 set finishTime=!finishTime::= !
-::echo !finishTime!
+
+rem quitando los ceros a la derecha para evitar el error por los formatos octales como el numero 09
+for %%i in (!startTime!) do (
+  for /f "delims=0 tokens=*" %%a in ("%%i") do (
+    set "formatSt=!formatSt! %%a"
+  )
+)
+for %%i in (!finishTime!) do (
+  for /f "delims=0 tokens=*" %%a in ("%%i") do (
+    set "formatFt=!formatFt! %%a"
+  )
+)
+
+
+
+
 set restTime=
 
-for /f "tokens=1-8" %%a in ("!finishTime! !startTime!") do (
+for /f "tokens=1-8" %%a in ("!formatFt! !formatSt!") do (
   set /a h=%%a - %%e
   set /a m=%%b - %%f
-  set /a s=%%c - %%g
+  set /a s=%%c - %%g  
   set /a ms=%%d - %%h
-  
   if !ms! lss 0 (
     set /a s=!s! - 1
-    set /a ms=100 + !ms!
+    set /a ms=!ms! + 100
   ) else if !ms! lss 10 (
     set ms=0!ms!
   )
 
   if !s! lss 0 (
     set /a m=!m! - 1
-    set /a s=60 + !s!
+    set /a s=!s! + 60
+    
   ) else if !s! lss 10 (
     set s=0!s!
   )
   
   if !m! lss 0 (
     set /a h=!h! - 1
-    set /a m=60 + !m!
+    set /a m=!m! + 60
   ) else if !m! lss 10 (
     set m=0!m!
   )
