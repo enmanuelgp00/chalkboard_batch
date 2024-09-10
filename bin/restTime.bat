@@ -13,24 +13,23 @@ set finishTime=!finishTime::= !
 rem quitando los ceros a la derecha para evitar el error por los formatos octales como el numero 09
 for %%i in (!startTime!) do (
   for /f "delims=0 tokens=*" %%a in ("%%i") do (
+    if "%%a" equ "" set "formatSt=!formatSt! 0"
     set "formatSt=!formatSt! %%a"
   )
 )
 for %%i in (!finishTime!) do (
-  for /f "delims=0 tokens=*" %%a in ("%%i") do (
+  for /f "delims=0 tokens=*" %%a in ("%%i") do (    
+    if "%%a" equ "" set "formatFt=!formatFt! 0"
     set "formatFt=!formatFt! %%a"
   )
 )
-
-
-
 
 set restTime=
 
 for /f "tokens=1-8" %%a in ("!formatFt! !formatSt!") do (
   set /a h=%%a - %%e
   set /a m=%%b - %%f
-  set /a s=%%c - %%g  
+  set /a s=%%c - %%g 
   set /a ms=%%d - %%h
   if !ms! lss 0 (
     set /a s=!s! - 1
@@ -43,14 +42,16 @@ for /f "tokens=1-8" %%a in ("!formatFt! !formatSt!") do (
     set /a m=!m! - 1
     set /a s=!s! + 60
     
-  ) else if !s! lss 10 (
+  )
+  if !s! lss 10 (
     set s=0!s!
   )
   
   if !m! lss 0 (
     set /a h=!h! - 1
     set /a m=!m! + 60
-  ) else if !m! lss 10 (
+  )
+  if !m! lss 10 (
     set m=0!m!
   )
   

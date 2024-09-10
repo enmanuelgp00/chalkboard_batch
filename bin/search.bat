@@ -1,1 +1,1 @@
-@dir /b /s | findstr /i /r "%~1"
+@dir /l /b /s "%~1"
