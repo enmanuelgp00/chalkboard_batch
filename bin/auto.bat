@@ -1,12 +1,13 @@
 @echo off
 setlocal enabledelayedexpansion
-set var=2
+set stage=%*
 :auto
-  set /p command="run $ "
-  if "!command!" equ "quit" (
+  echo.
+  set /p command="[auto] !stage! "
+  if "!command!" equ "[quit]" (
     goto:eof
   ) else (
-    %~1!command!%~1
+    !stage! !command!
   )
 goto:auto
 echo on

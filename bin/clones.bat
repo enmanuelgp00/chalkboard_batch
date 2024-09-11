@@ -21,7 +21,7 @@ set totalFiles=0
 rem ### Para la animaci'on del cambio de hora, guardo el caracter backspace en una variable
 set bksp=
 for /f %%A in ('"prompt $H&for %%B in (1) do rem"') do set "bksp=%%A"
-for /l %%i in (1, 1, 12) do (
+for /l %%i in (1, 1, 14) do (
   set "cleanline=!cleanline!!bksp!"
 )
 
@@ -30,18 +30,27 @@ echo Searching for cloned files...
 for /r %%f in (*) do (
   set /a totalFiles=!totalFiles! + 1
   for /r %%c in (*) do (
-    rem fc /lb1 /a "%%f" "%%c" > nul && set /a count=!count! + 1
-    if "%%~xzf" equ "%%~xzc" set /a count=!count! + 1
     
+    rem ### Comparando los posibles archivos clonados, if es m'as r'apido, aunque no tienen que ser archivos clonados necesariamente
+    if "%%f" neq "%%c" (
+      if "%%~xzf" equ "%%~xzc" (
+        set /p ="Comparing ... " < nul
+        fc /lb1 /n "%%f" "%%c" > nul && set /a count=!count! + 1
+          set /p ="!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!" < nul
+          set /p =".............." < nul
+          set /p ="!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!!bksp!" < nul  
+
+      )
+    )
   )
 
-  rem ### Comparando los posibles archivos clonados, if es m'as r'apido, aunque no tienen que ser archivos clonados necesariamente
+
   rem if "!count!" neq "1" set clean=1 && echo file: %%~nxf %%~zf && echo path: %%f && echo.
-  if "!count!" neq "1" set clean=1 && echo file: %%~nxf %%~zf >> %file% && echo path: %%f >> %file% && echo. >> %file%   
+  if "!count!" neq "0" set clean=1 && echo file: %%~nxf %%~zf >> %file% && echo path: %%f >> %file% && echo. >> %file%   
   
   set finishPoint=!time!
   call setFromCommand "diffTime" "restTime %startPoint% !finishPoint!"
-  set /p ="!cleanline!!diffTime!" < nul
+  set /p ="!cleanline!!diffTime! " < nul
   set count=0
 )
 echo.
@@ -57,7 +66,7 @@ if !clean! equ 0 (echo No cloned files found && erase %file%) else (
   rem ### Preguntando si borrar o no el archivo dump
   :question
     set /p answer="Would you like to erase the dump file? (y/n): "
-    if "!answer!" equ "y" (erase %file% && goto:eof) else if "!answer!" equ "n" (goto:eof)
+    if /i "!answer!" equ "y" (erase %file% && goto:eof) else if "!answer!" equ "n" (goto:eof)
   goto:question
 
 )

@@ -15,6 +15,7 @@ sfc
 takeown 
 whoami 
 winsat 
+certutil
 
 #emulacion de sistemas
 wsl
