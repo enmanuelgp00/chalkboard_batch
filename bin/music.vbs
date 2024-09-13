@@ -1,2 +1,2 @@
 set shell = createObject("WScript.Shell")
-shell.run "play %music%", false, 0
+shell.run "play %music%", 0, false

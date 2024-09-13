@@ -49,7 +49,7 @@ for /r %%f in (*) do (
   if "!count!" neq "0" set clean=1 && echo file: %%~nxf %%~zf >> %file% && echo path: %%f >> %file% && echo. >> %file%   
   
   set finishPoint=!time!
-  call setFromCommand "diffTime" "restTime %startPoint% !finishPoint!"
+  call setFromCommand "diffTime" "subtractTime %startPoint% !finishPoint!"
   set /p ="!cleanline!!diffTime! " < nul
   set count=0
 )

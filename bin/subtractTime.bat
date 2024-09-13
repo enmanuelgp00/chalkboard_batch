@@ -1,6 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
-rem restTime <start> <finish>
+rem subtractTime <start> <finish>
 
 set startTime=%~1
 set startTime=!startTime:.= !
@@ -61,8 +61,14 @@ for /f "tokens=1-8" %%a in ("!formatFt! !formatSt!") do (
   if !h! lss 10 (
     set h=0!h!
   )
-
-  set "restTime=!h!:!m!:!s!.!ms!"
+  
+  
 )
 
-echo !restTime!
+if "%~3" equ "--get-seconds" (
+  set /a "getSeconds=!s! + !m!*60 + !h!*3600"
+  echo !getSeconds!
+) else (
+  set "restTime=!h!:!m!:!s!.!ms!"
+  echo !restTime!
+)
