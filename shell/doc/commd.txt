@@ -69,3 +69,12 @@ wsl
   chcp (chage code page)
   #a qu'i se muestra el c'odigo de la pagina por defecto (debes usar los s'imbolos de escape ^, perara poder reprensentar % como literales)
   reg query hkcu\console\^%SystemRoot^%_system32_cmd.exe
+
+#Cambiar el tipo de usuario de administrador a usuario
+
+  net localgroup administrator %username% /delete
+  net localgroup users %username% /add
+
+#Cambiar el nombre del usuario
+  wmic useraccount where name="admin" rename "Admin"
+ 
