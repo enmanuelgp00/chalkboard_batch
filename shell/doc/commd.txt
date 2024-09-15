@@ -77,4 +77,7 @@ wsl
 
 #Cambiar el nombre del usuario
   wmic useraccount where name="admin" rename "Admin"
+
+#Mostrar las contraseñas de las redes locales guardadas 
+  netsh wlan show profile name="%nombre de la red%" key=clear
  
