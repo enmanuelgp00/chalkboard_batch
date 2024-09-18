@@ -16,25 +16,10 @@ if "%~1%" == "" (
     if "%~1" == "kill-server" (
       taskkill /im "MEGAcmdServer.exe"
 
-    ) else (
- 
-    rem running arguments    
-    if "%~1" == "get" (
-      if "%~2" neq "" (
-       for /f "delims=" %%c in ('time /t') do (set "startpoint=%%c")
-      )
-    )
-    %mg% %args%
-    if "%~1" == "get" (
-      if "%~2" neq "" (
-       for /f "delims=" %%c in ('time /t') do (echo [Started at %startpoint%, finished at %%c])
-      )
-    )
-    echo.
-    )  
+    ) else ( %mg% %args% )
   )
 )
-
+echo.
 echo on
 
 
