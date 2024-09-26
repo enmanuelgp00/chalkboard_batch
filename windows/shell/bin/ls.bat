@@ -20,6 +20,8 @@ if "%~1" equ "--color" (
         rem Color on images
       ) else if "%%~x2" equ ".jpg" (
         set "psCom=!psCom! write-host ^"%%2^" -foregroundColor darkyellow;"         
+      ) else if "%%~x2" equ ".jpeg" (
+        set "psCom=!psCom! write-host ^"%%2^" -foregroundColor darkyellow;"         
       ) else if "%%~x2" equ ".png" (
         set "psCom=!psCom! write-host ^"%%2^" -foregroundColor darkyellow;"         
       ) else if "%%~x2" equ ".webp" (
@@ -37,7 +39,10 @@ if "%~1" equ "--color" (
       )
     )
   )
-  powershell !psCom!
+  
+  rem dealing with the problems @ and # signs on powershell
+  set psCom=!psCom:@=`@!  
+  powershell !psCom:#=`#!
   echo.
   
 ) else (
