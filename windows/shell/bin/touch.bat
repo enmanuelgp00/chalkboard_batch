@@ -1,3 +1,2 @@
 @echo off
-  type nul > %~1
-echo on
+  type nul > "%~1"
