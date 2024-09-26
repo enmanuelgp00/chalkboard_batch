@@ -15,7 +15,8 @@ sfc
 takeown 
 whoami 
 winsat 
-certutil
+certutil // permite ver el hash de un archivo [certutil -hashfile nombre_del_archivo algoritmo_hash]
+
 
 #emulacion de sistemas
 wsl
