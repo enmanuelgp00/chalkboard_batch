@@ -1,0 +1,5 @@
+select disk 1
+clean
+convert mbr
+create partition primary
+format fs fat32 quick

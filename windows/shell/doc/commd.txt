@@ -21,6 +21,9 @@ certutil // permite ver el hash de un archivo [certutil -hashfile nombre_del_arc
 #emulacion de sistemas
 wsl
 
+#show drive letters 
+wmic logicaldisk get name
+
 #servicios de windows
   net start [service] 
   sc start
@@ -82,3 +85,7 @@ wsl
 #Mostrar las contraseñas de las redes locales guardadas 
   netsh wlan show profile name="%nombre de la red%" key=clear
  
+
+ #chage notepad colors
+  reg add "HKCU\Control Panel\Colors" /v Background /t REG_SZ /d "0 0 0" /f
+  reg add "HKCU\Control Panel\Colors" /v WindowText /t REG_SZ /d "255 255 255" /f

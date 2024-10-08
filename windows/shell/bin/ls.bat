@@ -40,8 +40,10 @@ if "%~1" equ "--color" (
     )
   )
   
-  rem dealing with the problems @ and # signs on powershell
+  rem dealing with variables references in powershell
   set psCom=!psCom:@=`@!  
+  set psCom=!psCom:(=`(!  
+  set psCom=!psCom:^)=`^)!  
   powershell !psCom:#=`#!
   echo.
   

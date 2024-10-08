@@ -1,0 +1,28 @@
+## Copilot
+Claro, puedes ver las interfaces de red en Linux sin usar ifconfig utilizando otros comandos nativos. Aquí tienes algunas opciones:
+- Comando ip:
+    - Para listar todas las interfaces de red, usa:
+
+ip link show
+
+    - Para obtener detalles más específicos, puedes usar:
+
+ip addr show
+
+- Comando nmcli:
+    - Para mostrar el estado de los dispositivos de red, usa:
+
+nmcli device status
+
+- Comando netstat:
+    - Para listar todas las interfaces de red, usa:
+
+netstat -i
+
+- Comando dmesg:
+    - Para ver mensajes del kernel relacionados con las interfaces de red, usa:
+
+dmesg | grep -i eth
+
+Estos comandos te permitirán obtener información detallada sobre las interfaces de red en tu sistema Linux.
+¿Te gustaría más información sobre alguno de estos comandos?

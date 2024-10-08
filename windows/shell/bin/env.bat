@@ -20,8 +20,10 @@ set input=
     )
   )
 
-  echo running [!command! ]
+  rem some color and info about whats is running
+  powershell write-host "running [!command! ]" -foregroundColor green
   echo.
+
   call !command!
   @echo off
 
