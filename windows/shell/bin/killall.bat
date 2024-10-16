@@ -5,9 +5,10 @@ goto:eof
 :main
 	setlocal
 	echo.
-	set "exceptions=svchost.exe notepad++.exe RuntimeBroker.exe dllhost.exe explorer.exe cmd.exe tasklist.exe taskkill.exe conhost.exe sihost.exe ctfmon.exe eguiProxy.exe"
+	set "exceptions=taskmgr.exe svchost.exe notepad++.exe dllhost.exe explorer.exe cmd.exe tasklist.exe taskkill.exe conhost.exe sihost.exe ctfmon.exe eguiProxy.exe"
 	echo Getting process list ...
 	call :getPNames "%exceptions%" names 
+	echo %names%
 	echo Killing process ...
 	call :kill "%names%" stdo
 	call :powShell "%stdo%"
@@ -22,11 +23,14 @@ goto:eof
 	set return=
 	for %%i in (%process%) do (
 		for /f "tokens=1*" %%1 in ('taskkill /f /im %%~ni.exe 2^>^&1') do (
-			set "out=%%1 %%2"
+			set "out=%%1 %%2"			
 			if %%1 equ SUCCESS: (
 				set "return=!return! write-host !out! -foreground green;"
+			) else if %%1 equ ERROR: (
+				set "return=!return! write-host !out! -foreground red"
+				rem -noNewLine;"
 			) else (
-				set "return=!return! write-host !out! -foreground red;"
+				set "return=!return! write-host "`t`t"!out! -foreground gray;"
 			)
 		)
 	)
@@ -66,7 +70,7 @@ goto:eof
 		set arr=%arr:~1,-1%
 		set res=false
 		for %%i in (%arr%) do (
-			if %%i equ %str% (set res=true)
+			if /i %%i equ %str% (set res=true)
 		)
 	endlocal & set %3=%res%
 goto:eof
